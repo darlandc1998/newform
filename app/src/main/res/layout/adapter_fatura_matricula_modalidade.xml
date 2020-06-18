@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/selector_transparent_grey_border_bottom"
+    android:padding="15dp"
+    android:orientation="vertical"
+    android:weightSum="2">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="2">
+
+        <TextView
+            android:id="@+id/txtFaturaModalidade"
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:layout_height="wrap_content"
+            android:text="@string/modalidade"
+            android:textStyle="bold"
+            />
+
+        <TextView
+            android:id="@+id/txtFaturaPlanoValor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/txtFaturaGraduacao"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/graduacao"
+        android:textSize="11sp"
+        />
+
+    <TextView
+        android:id="@+id/txtFaturaPlano"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/plano"
+        android:textSize="11sp"
+        />
+
+
+</LinearLayout>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.Toolbar
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/primaryColor"
+    app:theme="@style/SearchToolbarTheme"
+    app:popupTheme="@style/ThemeOverlay.AppCompat.Dark"
+    >
+
+    <ImageButton
+        android:id="@+id/back"
+        android:background="@drawable/selector_transparent_grey"
+        android:src="@drawable/ic_arrow_back_white_24dp"
+        android:paddingRight="15dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:layout_marginRight="5dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <EditText
+        android:id="@+id/edtSearch"
+        android:hint="@string/buscar"
+        android:textColor="@color/grey100"
+        android:textColorHint="@color/grey200"
+        android:textCursorDrawable="@null"
+        android:background="@android:color/transparent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+</androidx.appcompat.widget.Toolbar>

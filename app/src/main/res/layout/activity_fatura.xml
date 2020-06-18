@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+         <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="15dp" >
+
+             <LinearLayout
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:orientation="vertical">
+
+                 <LinearLayout
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:orientation="horizontal">
+
+                     <TextView
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:text="@string/matricula"
+                         />
+
+                     <TextView
+                         android:layout_width="wrap_content"
+                         android:layout_height="match_parent"
+                         android:text="@string/asterisco"
+                         android:textColor="@color/red500"
+                         />
+
+                 </LinearLayout>
+
+                 <EditText
+                     android:id="@+id/edtMatricula"
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     android:focusable="false"
+                     android:background="@drawable/selector_brown500_transparent_border"
+                     android:layout_marginTop="5dp"
+                     android:paddingTop="10dp"
+                     android:paddingBottom="10dp"
+                     android:paddingLeft="5dp"
+                     android:hint="@string/selecione_uma_matricula"/>
+
+             </LinearLayout>
+
+             <LinearLayout
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:orientation="horizontal"
+                 android:layout_marginTop="15dp">
+
+                 <LinearLayout
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:orientation="vertical">
+
+                     <LinearLayout
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:orientation="horizontal">
+
+                         <TextView
+                             android:layout_width="wrap_content"
+                             android:layout_height="wrap_content"
+                             android:text="@string/dia"/>
+
+                         <TextView
+                             android:layout_width="wrap_content"
+                             android:layout_height="match_parent"
+                             android:text="@string/asterisco"
+                             android:textColor="@color/red500"
+                             />
+
+                     </LinearLayout>
+
+                     <EditText
+                         android:id="@+id/edtFaturaDia"
+                         android:layout_width="50dp"
+                         android:layout_height="wrap_content"
+                         android:textSize="14sp"
+                         android:padding="5dp"
+                         android:enabled="false"
+                         android:background="@drawable/shape_background_transparent_border_bottom"/>
+
+                 </LinearLayout>
+
+                 <LinearLayout
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:orientation="vertical"
+                     android:layout_marginLeft="15dp">
+
+                     <LinearLayout
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:orientation="horizontal">
+
+                         <TextView
+                             android:layout_width="wrap_content"
+                             android:layout_height="wrap_content"
+                             android:text="@string/mes"/>
+
+                         <TextView
+                             android:layout_width="wrap_content"
+                             android:layout_height="match_parent"
+                             android:text="@string/asterisco"
+                             android:textColor="@color/red500"
+                             />
+
+                     </LinearLayout>
+
+                     <EditText
+                         android:id="@+id/edtFaturaMes"
+                         android:layout_width="100dp"
+                         android:layout_height="wrap_content"
+                         android:focusable="false"
+                         android:textSize="14sp"
+                         android:padding="5dp"
+                         android:background="@drawable/shape_background_transparent_border_bottom"/>
+
+                 </LinearLayout>
+
+                 <LinearLayout
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:orientation="vertical"
+                     android:layout_marginLeft="15dp">
+
+                     <LinearLayout
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:orientation="horizontal">
+
+                         <TextView
+                             android:layout_width="wrap_content"
+                             android:layout_height="wrap_content"
+                             android:text="@string/ano"/>
+
+                         <TextView
+                             android:layout_width="wrap_content"
+                             android:layout_height="match_parent"
+                             android:text="@string/asterisco"
+                             android:textColor="@color/red500"
+                             />
+
+                     </LinearLayout>
+
+                     <EditText
+                         android:id="@+id/edtFaturaAno"
+                         android:layout_width="100dp"
+                         android:layout_height="wrap_content"
+                         android:textSize="14sp"
+                         android:padding="5dp"
+                         android:focusable="false"
+                         android:background="@drawable/shape_background_transparent_border_bottom"/>
+
+                 </LinearLayout>
+
+             </LinearLayout>
+
+             <LinearLayout
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:orientation="vertical"
+                 android:layout_marginTop="20dp">
+
+                 <TextView
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     android:text="@string/modalidades"
+                     android:gravity="center"
+                     android:layout_marginTop="10dp"
+                     android:textStyle="bold"
+                     />
+
+                 <androidx.recyclerview.widget.RecyclerView
+                     android:id="@+id/recyclerViewFaturaMatriculaModalidade"
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     />
+
+                 <LinearLayout
+                     android:id="@+id/linearFaturaTotal"
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     android:orientation="horizontal"
+                     android:layout_marginTop="15dp"
+                     android:gravity="right"
+                     android:padding="7dp">
+
+                     <TextView
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:text="@string/total"
+                         />
+
+                     <TextView
+                         android:id="@+id/txtFaturaTotal"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:textStyle="bold"
+                         android:text="R$ 0,00"
+                         android:layout_marginLeft="5dp"
+                         />
+
+                     <EditText
+                         android:id="@+id/edtFaturaTotal"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:visibility="gone"
+                         />
+
+                 </LinearLayout>
+
+             </LinearLayout>
+
+         </LinearLayout>
+
+    </ScrollView>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true">
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/btnSalvarFatura"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:foregroundGravity="center_horizontal"
+            android:layout_margin="15dp"
+            android:src="@drawable/ic_check_white_24dp"
+            />
+
+    </LinearLayout>
+
+
+</RelativeLayout>
