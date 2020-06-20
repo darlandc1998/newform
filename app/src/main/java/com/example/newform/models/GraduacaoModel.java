@@ -21,7 +21,7 @@ public class GraduacaoModel {
                         + COLUNA_GRADUACAO + " varchar (100) not null, "
                         + COLUNA_ATIVO + " integer not null default 1, "
                         + " foreign key (" + COLUNA_MODALIDADE + ") REFERENCES tb_modalidades ( " + COLUNA_MODALIDADE + "), "
-                        + " primary key (" + COLUNA_GRADUACAO +" ) "
+                        + " primary key (" + COLUNA_GRADUACAO + ", " + COLUNA_MODALIDADE +" ) "
                     + ");";
 
     public static final String

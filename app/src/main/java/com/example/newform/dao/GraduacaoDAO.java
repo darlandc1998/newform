@@ -74,7 +74,7 @@ public class GraduacaoDAO extends AbstractDAO {
             ContentValues values = new ContentValues();
             values.put(GraduacaoModel.COLUNA_ATIVO, 0);
 
-            idCreated = db.update(GraduacaoModel.TABELA_NOME, values, GraduacaoModel.COLUNA_GRADUACAO + "= ?", new String[]{model.getGraduacao()});
+            idCreated = db.update(GraduacaoModel.TABELA_NOME, values, GraduacaoModel.COLUNA_GRADUACAO + "= ? and " + GraduacaoModel.COLUNA_MODALIDADE + " = ? ", new String[]{model.getGraduacao(), model.getModalidade()});
         }
         finally {
             Close();
