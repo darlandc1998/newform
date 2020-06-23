@@ -31,7 +31,7 @@ public class MatriculaModalidadeModel {
                             + " foreign key (" + COLUNA_ID_MATRICULA + ") REFERENCES tb_matriculas ( " + MatriculaModel.COLUNA_ID + "), "
                             + " foreign key (" + COLUNA_MODALIDADE + ") REFERENCES tb_modalidades ( " + COLUNA_MODALIDADE + "), "
                             + " foreign key (" + COLUNA_MODALIDADE + "," + COLUNA_GRADUACAO + ") REFERENCES tb_graduacoes (" + COLUNA_MODALIDADE + ", " + COLUNA_GRADUACAO + "), "
-                            + " foreign key (" + COLUNA_MODALIDADE +", " + COLUNA_PLANO + ") REFERENCES tb_planos (" + COLUNA_MODALIDADE + ", " + COLUNA_GRADUACAO + "), "
+                            + " foreign key (" + COLUNA_MODALIDADE +", " + COLUNA_PLANO + ") REFERENCES tb_planos (" + COLUNA_MODALIDADE + ", " + COLUNA_PLANO + "), "
                             + " primary key (" + COLUNA_ID_MATRICULA + ","+ COLUNA_MODALIDADE + "," + COLUNA_GRADUACAO + "," + COLUNA_PLANO + ") "
                     + " );";
 
