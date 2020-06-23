@@ -67,7 +67,7 @@ public class MatriculaModalidadeDAO extends AbstractDAO {
                     " SELECT " + MatriculaModalidadeModel.TABELA_NOME + ".*, " + PlanoModel.TABELA_NOME + "." + PlanoModel.COLUNA_VALOR_MENSAL +
                     " FROM " + MatriculaModalidadeModel.TABELA_NOME +
                     " INNER JOIN " + PlanoModel.TABELA_NOME + " ON (" + PlanoModel.TABELA_NOME + "." + PlanoModel.COLUNA_PLANO + " = " + MatriculaModalidadeModel.TABELA_NOME + "." + MatriculaModalidadeModel.COLUNA_PLANO + ")" +
-                    " WHERE " + MatriculaModalidadeModel.TABELA_NOME + "." + MatriculaModalidadeModel.COLUNA_ATIVO + " = 1 AND " + MatriculaModalidadeModel.COLUNA_ID_MATRICULA + " = ? " +
+                    " WHERE " + MatriculaModalidadeModel.TABELA_NOME + "." + MatriculaModalidadeModel.COLUNA_ATIVO + " = 1 AND " + PlanoModel.TABELA_NOME + "." + PlanoModel.COLUNA_ATIVO + " = 1 AND " + MatriculaModalidadeModel.COLUNA_ID_MATRICULA + " = ? " +
                     " ORDER BY " + PlanoModel.TABELA_NOME + "." + PlanoModel.COLUNA_VALOR_MENSAL, new String[]{ idRegistration });
 
             cursor.moveToFirst();
@@ -84,7 +84,6 @@ public class MatriculaModalidadeDAO extends AbstractDAO {
         } finally {
             Close();
         }
-
         return modalidades;
     }
 
@@ -122,7 +121,7 @@ public class MatriculaModalidadeDAO extends AbstractDAO {
             ContentValues values = new ContentValues();
             values.put(MatriculaModalidadeModel.COLUNA_ATIVO, 0);
 
-            idCreated = db.update(MatriculaModalidadeModel.TABELA_NOME, values, MatriculaModalidadeModel.COLUNA_MODALIDADE +  "= ? and " + MatriculaModalidadeModel.COLUNA_GRADUACAO + " = ? and " + MatriculaModalidadeModel.COLUNA_PLANO + " = ? ", new String[]{model.getModalidade(), model.getGraduacao(), model.getPlano()});
+            idCreated = db.update(MatriculaModalidadeModel.TABELA_NOME, values,   MatriculaModalidadeModel.COLUNA_ID_MATRICULA + " = ? and " + MatriculaModalidadeModel.COLUNA_MODALIDADE +  " = ? and " + MatriculaModalidadeModel.COLUNA_GRADUACAO + " = ? and " + MatriculaModalidadeModel.COLUNA_PLANO + " = ? ", new String[]{model.getIdMatricula().toString(), model.getModalidade(), model.getGraduacao(), model.getPlano()});
         }
         finally {
             Close();

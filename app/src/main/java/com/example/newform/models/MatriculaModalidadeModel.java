@@ -32,7 +32,7 @@ public class MatriculaModalidadeModel {
                             + " foreign key (" + COLUNA_MODALIDADE + ") REFERENCES tb_modalidades ( " + COLUNA_MODALIDADE + "), "
                             + " foreign key (" + COLUNA_MODALIDADE + "," + COLUNA_GRADUACAO + ") REFERENCES tb_graduacoes (" + COLUNA_MODALIDADE + ", " + COLUNA_GRADUACAO + "), "
                             + " foreign key (" + COLUNA_MODALIDADE +", " + COLUNA_PLANO + ") REFERENCES tb_planos (" + COLUNA_MODALIDADE + ", " + COLUNA_GRADUACAO + "), "
-                            + " primary key (" + COLUNA_MODALIDADE + "," + COLUNA_GRADUACAO + "," + COLUNA_PLANO + ") "
+                            + " primary key (" + COLUNA_ID_MATRICULA + ","+ COLUNA_MODALIDADE + "," + COLUNA_GRADUACAO + "," + COLUNA_PLANO + ") "
                     + " );";
 
     public static final String
@@ -147,6 +147,8 @@ public class MatriculaModalidadeModel {
                 ", dtInicio=" + dtInicio +
                 ", dtFim=" + dtFim +
                 ", plano='" + plano + '\'' +
+                ", ativo=" + ativo +
+                ", valorMensalPlano=" + valorMensalPlano +
                 '}';
     }
 }

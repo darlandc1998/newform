@@ -79,4 +79,6 @@
     <string name="data_nascimento_invalida">Data de nascimento inválida</string>
     <string name="email_invalido">Email inválido</string>
     <string name="informe_graduacao_para_modalidade">Informe ao menos uma graduação para modalidade</string>
+    <string name="sem_graduacoes_registradas_para_modalidade">Sem graduações registradas para esta modalidade</string>
+    <string name="sem_planos_registrados_para_modalidade">Sem planos registrados para esta modalidade</string>
 </resources>

@@ -106,6 +106,11 @@ public class MatriculasActivity extends AppCompatActivity implements View.OnClic
             edtGraduacao.setText(matriculaModalidade.getGraduacao());
             edtDtInicio.setText(UtilDate.getDateFormatPtBr(matriculaModalidade.getDtInicio()));
             edtPlano.setText(matriculaModalidade.getPlano());
+
+            //Desabilitar e mostrar componentes para edição
+            edtModalidade.setEnabled(false);
+            edtGraduacao.setEnabled(false);
+            edtPlano.setEnabled(false);
             btnExcluirModalidade.setVisibility(View.VISIBLE);
         }
 
@@ -319,6 +324,11 @@ public class MatriculasActivity extends AppCompatActivity implements View.OnClic
     private void openDialogGraduation(final View view, String modality){
         List<GraduacaoModel> graduacoes = new GraduacaoDAO(getApplicationContext()).selectForModality(modality);
 
+        if (graduacoes.isEmpty()){
+            DialogDefault.messageOk(this, null, getString(R.string.sem_graduacoes_registradas_para_modalidade), null, null, null);
+            return;
+        }
+
         final DialogFiltro dialog = new DialogFiltro(MatriculasActivity.this, graduacoes, new GenericCode.DialogFiltro<GraduacaoModel>() {
             @Override
             public void code(List<GraduacaoModel> listaNova, List<GraduacaoModel> listaCompleta, String busca) {
@@ -345,6 +355,11 @@ public class MatriculasActivity extends AppCompatActivity implements View.OnClic
 
     private void openDialogPlan(final View view, String modality){
         List<PlanoModel> planos = new PlanoDAO(getApplicationContext()).selectForModality(modality);
+
+        if (planos.isEmpty()){
+            DialogDefault.messageOk(this, null, getString(R.string.sem_planos_registrados_para_modalidade), null, null, null);
+            return;
+        }
 
         final DialogFiltro dialog = new DialogFiltro(MatriculasActivity.this, planos, new GenericCode.DialogFiltro<PlanoModel>() {
             @Override
