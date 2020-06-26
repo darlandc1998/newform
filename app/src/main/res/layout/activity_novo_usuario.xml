@@ -40,7 +40,6 @@
 
     </LinearLayout>
 
-
     <EditText
         android:id="@+id/edtUsuario"
         android:layout_width="match_parent"
@@ -69,23 +68,25 @@
         android:singleLine="true"
         />
 
-    <TextView
-        android:id="@+id/txtNovoUsuario"
-        android:layout_width="wrap_content"
+    <EditText
+        android:id="@+id/edtSenhaConfirmacao"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/cadastrar_underline"
-        android:layout_gravity="right"
-        android:textSize="15sp"
+        android:hint="@string/confirmar_senha"
+        android:inputType="textPassword"
         android:textColor="@color/white"
-        android:textStyle="bold"
-        android:padding="5dp"
+        android:textColorHint="@color/white"
+        android:padding="15dp"
+        android:maxLines="1"
+        android:lines="1"
+        android:singleLine="true"
         />
 
     <Button
-        android:id="@+id/btnLogar"
+        android:id="@+id/btnCadastrar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/entrar"
+        android:text="@string/cadastrar"
         android:textAllCaps="false"
         android:background="@color/brown500"
         android:textColor="@color/white"

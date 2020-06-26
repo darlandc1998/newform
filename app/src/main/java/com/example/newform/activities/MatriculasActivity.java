@@ -250,7 +250,7 @@ public class MatriculasActivity extends AppCompatActivity implements View.OnClic
         List<AlunoModel> alunos = alunoDAO.select();
 
         if (alunos.isEmpty()){
-            DialogDefault.messageOk(this, null, getString(R.string.sem_alunos_registrados), null, null, null);
+            DialogDefault.messageOk(this, null, getString(R.string.sem_alunos_registrados) + getString(R.string.ponto_exclamacao), null, null, null);
             return;
         }
 
@@ -291,7 +291,7 @@ public class MatriculasActivity extends AppCompatActivity implements View.OnClic
         List<ModalidadeModel> modalidades = new ModalidadeDAO(getApplicationContext()).select();
 
         if (modalidades.isEmpty()){
-            DialogDefault.messageOk(this, null, getResources().getString(R.string.sem_modalidades_registradas), null, null, null);
+            DialogDefault.messageOk(this, null, getResources().getString(R.string.sem_modalidades_registradas) + getString(R.string.ponto_exclamacao), null, null, null);
             return;
         }
 

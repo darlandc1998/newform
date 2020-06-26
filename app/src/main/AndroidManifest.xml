@@ -4,6 +4,7 @@
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -14,7 +15,7 @@
         android:theme="@style/AppTheme">
 
         <activity
-            android:name=".activities.LoginActivity"
+            android:name=".activities.MainActivity"
             android:configChanges="orientation"
             android:screenOrientation="fullSensor">
             <intent-filter>
@@ -25,6 +26,11 @@
 
         <activity
             android:name=".activities.HomeActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="fullSensor"/>
+
+        <activity
+            android:name=".activities.NovoUsuarioActivity"
             android:configChanges="orientation"
             android:screenOrientation="fullSensor"/>
 

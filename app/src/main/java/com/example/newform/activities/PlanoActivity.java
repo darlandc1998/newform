@@ -82,7 +82,7 @@ public class PlanoActivity extends AppCompatActivity implements View.OnClickList
         List<ModalidadeModel> modalidades = new ModalidadeDAO(getApplicationContext()).select();
 
         if (modalidades.isEmpty()){
-            DialogDefault.messageOk(this, null, getString(R.string.sem_modalidades_registradas), null, null, null);
+            DialogDefault.messageOk(this, null, getString(R.string.sem_modalidades_registradas) + getString(R.string.ponto_exclamacao), null, null, null);
             return;
         }
 

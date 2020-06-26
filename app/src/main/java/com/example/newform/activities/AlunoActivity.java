@@ -1,11 +1,9 @@
 package com.example.newform.activities;
 
-import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -280,7 +278,7 @@ public class AlunoActivity extends AppCompatActivity implements View.OnClickList
         }
 
         if (messageValidate != null){
-            DialogDefault.messageOk(this, null, getString(R.string.obrigatorio_campo) + " " + messageValidate.toLowerCase(), null, null, null);
+            DialogDefault.messageOk(this, null, getString(R.string.obrigatorio_campo) + " " + messageValidate.toLowerCase() + getString(R.string.ponto_exclamacao), null, null, null);
             return;
         }
 

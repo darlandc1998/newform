@@ -4,12 +4,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
-
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.example.newform.R;
 import com.example.newform.dao.FaturaMatriculaDAO;
 import com.example.newform.models.FaturaMatriculaModel;
@@ -17,8 +15,6 @@ import com.example.newform.reyclerview.AdapterDefault;
 import com.example.newform.reyclerview.adapter.FaturasAdapter;
 import com.example.newform.utils.UtilActivityResult;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
-import java.util.ArrayList;
 import java.util.List;
 
 public class FaturasActivity extends AppCompatActivity implements View.OnClickListener {
