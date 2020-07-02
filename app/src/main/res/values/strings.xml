@@ -92,4 +92,6 @@
     <string name="preencha_campo_usuario_para_cadastro">Preencha o campo de usuário para cadastrar-se!</string>
     <string name="conta_criada_com_sucesso">Conta criada com sucesso!</string>
     <string name="ponto_exclamacao">!</string>
+    <string name="sair">Sair</string>
+    <string name="deseja_sair_do_aplicativo">Deseja realmente sair do aplicativo?</string>
 </resources>

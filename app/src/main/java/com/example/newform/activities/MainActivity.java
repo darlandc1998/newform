@@ -11,7 +11,10 @@ import android.widget.TextView;
 import com.example.newform.R;
 import com.example.newform.api.API;
 import com.example.newform.dialogs.DialogDefault;
+import com.example.newform.enums.SharedEnum;
 import com.example.newform.models.UsuarioModel;
+import com.example.newform.utils.UtilSharedPreferences;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -26,14 +29,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         ((TextView) findViewById(R.id.txtNovoUsuario)).setOnClickListener(this);
         ((Button) findViewById(R.id.btnLogar)).setOnClickListener(this);
+
+        if (UtilSharedPreferences.getLong(this, SharedEnum.CODIGO_ALUNO.toString(), -1L) > 0){
+            startActivity(new Intent(MainActivity.this, HomeActivity.class));
+        }
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btnLogar:
-                startActivity(new Intent(MainActivity.this, HomeActivity.class));
-                //login();
+                login();
                 break;
             case R.id.txtNovoUsuario:
                 startActivity(new Intent(MainActivity.this, NovoUsuarioActivity.class));
@@ -53,12 +59,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         API.getUsuario(usuario, senha, new Callback<UsuarioModel>() {
             @Override
             public void onResponse(Call<UsuarioModel> call, Response<UsuarioModel> response) {
-                if (response == null){
+                if (response.body() == null){
                     DialogDefault.messageOk(MainActivity.this, null, getString(R.string.dados_invalidos), null, null, null);
-                } else if (response.body().getHabilitado()) {
-                    startActivity(new Intent(MainActivity.this, HomeActivity.class));
-                } else {
+                } else if (!response.body().getHabilitado()) {
                     DialogDefault.messageOk(MainActivity.this, null, getString(R.string.usuario_nao_habilitado), null, null, null);
+                } else {
+                    UtilSharedPreferences.putLong(MainActivity.this, SharedEnum.CODIGO_ALUNO.toString(), response.body().getId());
+
+                    startActivity(new Intent(MainActivity.this, HomeActivity.class));
                 }
             }
 

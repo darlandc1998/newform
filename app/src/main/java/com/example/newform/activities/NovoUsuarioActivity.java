@@ -10,8 +10,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.newform.R;
 import com.example.newform.api.API;
 import com.example.newform.dialogs.DialogDefault;
+import com.example.newform.enums.SharedEnum;
 import com.example.newform.models.RespostaModel;
 import com.example.newform.models.UsuarioModel;
+import com.example.newform.utils.UtilSharedPreferences;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -61,7 +63,7 @@ public class NovoUsuarioActivity extends AppCompatActivity implements View.OnCli
             return;
         }
 
-        UsuarioModel usuario = new UsuarioModel();
+        final UsuarioModel usuario = new UsuarioModel();
         usuario.setNome(nome);
         usuario.setSenha(senha);
         usuario.setHabilitado(true);
@@ -69,8 +71,9 @@ public class NovoUsuarioActivity extends AppCompatActivity implements View.OnCli
         API.postUsuario(usuario, new Callback<RespostaModel>() {
             @Override
             public void onResponse(Call<RespostaModel> call, Response<RespostaModel> response) {
-                if (response != null && response.body().getSucesso()) {
+                if (response != null && response.body() != null && response.body().getSucesso()) {
                     Toast.makeText(NovoUsuarioActivity.this, R.string.conta_criada_com_sucesso, Toast.LENGTH_SHORT).show();
+                    UtilSharedPreferences.putLong(NovoUsuarioActivity.this, SharedEnum.CODIGO_ALUNO.toString(), response.body().getCodigo());
                     finish();
                 } else {
                     DialogDefault.messageOk(NovoUsuarioActivity.this, null, response.body().getMensagem(), null, null, null);

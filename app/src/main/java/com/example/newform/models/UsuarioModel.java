@@ -42,4 +42,14 @@ public class UsuarioModel implements Serializable {
     public void setHabilitado(Boolean habilitado) {
         this.habilitado = habilitado;
     }
+
+    @Override
+    public String toString() {
+        return "UsuarioModel{" +
+                "id=" + id +
+                ", nome='" + nome + '\'' +
+                ", senha='" + senha + '\'' +
+                ", habilitado=" + habilitado +
+                '}';
+    }
 }

@@ -155,12 +155,29 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/menuSair"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:orientation="vertical"
             android:layout_margin="10dp"
-            android:padding="20dp"/>
+            android:background="@drawable/selector_menu_button"
+            android:padding="20dp">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:src="@drawable/ic_exit_to_app_brown500_36dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/sair"
+                android:textStyle="bold"
+                android:gravity="center_horizontal" />
+
+        </LinearLayout>
 
     </LinearLayout>
 
