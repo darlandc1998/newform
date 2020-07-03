@@ -35,4 +35,13 @@ public class RespostaModel implements Serializable {
     public void setCodigo(Long codigo) {
         this.codigo = codigo;
     }
+
+    @Override
+    public String toString() {
+        return "RespostaModel{" +
+                "mensagem='" + mensagem + '\'' +
+                ", sucesso=" + sucesso +
+                ", codigo=" + codigo +
+                '}';
+    }
 }

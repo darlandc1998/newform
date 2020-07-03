@@ -1,5 +1,7 @@
 package com.example.newform.models;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
@@ -61,8 +63,10 @@ public class AlunoModel implements Serializable {
 
     =================================================*/
 
+    @SerializedName("Id")
     private Long id;
     private String aluno;
+    @SerializedName("data_nascimento")
     private Date dtNascimento;
     private String sexo;
     private String telefone;
@@ -78,6 +82,8 @@ public class AlunoModel implements Serializable {
     private String pais;
     private String cep;
     private Integer ativo;
+    @SerializedName("id_usuario")
+    private Long idUsuario;
 
     public Long getId() {
         return id;
@@ -213,6 +219,14 @@ public class AlunoModel implements Serializable {
 
     public void setAtivo(Integer ativo) {
         this.ativo = ativo;
+    }
+
+    public Long getIdUsuario() {
+        return idUsuario;
+    }
+
+    public void setIdUsuario(Long idUsuario) {
+        this.idUsuario = idUsuario;
     }
 
     @Override

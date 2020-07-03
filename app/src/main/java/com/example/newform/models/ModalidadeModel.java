@@ -1,5 +1,7 @@
 package com.example.newform.models;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -39,6 +41,8 @@ public class ModalidadeModel implements Serializable  {
     }
 
     private String modalidade;
+    @SerializedName("id_usuario")
+    private Long idUsuario;
     private Integer ativo;
 
     public String getModalidade() {
@@ -55,6 +59,14 @@ public class ModalidadeModel implements Serializable  {
 
     public void setAtivo(Integer ativo) {
         this.ativo = ativo;
+    }
+
+    public Long getIdUsuario() {
+        return idUsuario;
+    }
+
+    public void setIdUsuario(Long idUsuario) {
+        this.idUsuario = idUsuario;
     }
 
     @Override

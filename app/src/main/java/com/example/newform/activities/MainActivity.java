@@ -7,14 +7,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-
 import com.example.newform.R;
-import com.example.newform.api.API;
+import com.example.newform.apis.UsuarioAPI;
 import com.example.newform.dialogs.DialogDefault;
 import com.example.newform.enums.SharedEnum;
 import com.example.newform.models.UsuarioModel;
+import com.example.newform.sync.ServiceSync;
 import com.example.newform.utils.UtilSharedPreferences;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -56,7 +55,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             return;
         }
 
-        API.getUsuario(usuario, senha, new Callback<UsuarioModel>() {
+        UsuarioAPI.getUsuario(usuario, senha, new Callback<UsuarioModel>() {
             @Override
             public void onResponse(Call<UsuarioModel> call, Response<UsuarioModel> response) {
                 if (response.body() == null){
@@ -65,7 +64,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     DialogDefault.messageOk(MainActivity.this, null, getString(R.string.usuario_nao_habilitado), null, null, null);
                 } else {
                     UtilSharedPreferences.putLong(MainActivity.this, SharedEnum.CODIGO_ALUNO.toString(), response.body().getId());
-
+                    //*Sincronizar
+                        ServiceSync.Sync(MainActivity.this);
+                    //*
                     startActivity(new Intent(MainActivity.this, HomeActivity.class));
                 }
             }

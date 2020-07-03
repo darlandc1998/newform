@@ -8,7 +8,7 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.newform.R;
-import com.example.newform.api.API;
+import com.example.newform.apis.UsuarioAPI;
 import com.example.newform.dialogs.DialogDefault;
 import com.example.newform.enums.SharedEnum;
 import com.example.newform.models.RespostaModel;
@@ -68,7 +68,7 @@ public class NovoUsuarioActivity extends AppCompatActivity implements View.OnCli
         usuario.setSenha(senha);
         usuario.setHabilitado(true);
 
-        API.postUsuario(usuario, new Callback<RespostaModel>() {
+        UsuarioAPI.postUsuario(usuario, new Callback<RespostaModel>() {
             @Override
             public void onResponse(Call<RespostaModel> call, Response<RespostaModel> response) {
                 if (response != null && response.body() != null && response.body().getSucesso()) {

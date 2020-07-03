@@ -1,4 +1,4 @@
-package com.example.newform.api.endpoint;
+package com.example.newform.apis.endpoints;
 
 import com.example.newform.models.RespostaModel;
 import com.example.newform.models.UsuarioModel;
