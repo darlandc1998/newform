@@ -7,6 +7,7 @@ import com.example.newform.models.RespostaModel;
 import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
+import retrofit2.Response;
 
 public final class AlunoAPI {
 
@@ -22,10 +23,15 @@ public final class AlunoAPI {
         call.enqueue(callback);
     }
 
-    public static void postAluno(AlunoModel aluno, Callback<RespostaModel> callback){
+    public static RespostaModel postAluno(AlunoModel aluno){
         AlunoEndPoint endPoint = GenericEndPoint.retrofit.create(AlunoEndPoint.class);
         Call<RespostaModel> call = endPoint.postAluno(aluno);
-        call.enqueue(callback);
+        try {
+            return call.execute().body();
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        return null;
     }
 
 }

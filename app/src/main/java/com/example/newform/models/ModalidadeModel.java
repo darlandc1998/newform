@@ -12,14 +12,16 @@ public class ModalidadeModel implements Serializable  {
 
     public static final String
             COLUNA_MODALIDADE = "modalidade",
-            COLUNA_ATIVO = "ativo";
+            COLUNA_ATIVO = "ativo",
+            COLUNA_ID_SERVER = "id_server";
 
     public static final String
             CREATE_TABLE =
             " create table " + TABELA_NOME
                     + " ( "
                         + COLUNA_MODALIDADE + " varchar (100) not null primary key, "
-                        + COLUNA_ATIVO + " integer not null default 1 "
+                        + COLUNA_ATIVO + " integer not null default 1, "
+                        + COLUNA_ID_SERVER + " integer "
                     + " ); ";
 
     public static final String
@@ -35,11 +37,13 @@ public class ModalidadeModel implements Serializable  {
 
     }
 
-    public ModalidadeModel(String modalidade, Integer ativo) {
+    public ModalidadeModel(Long idServer, String modalidade, Integer ativo) {
+        this.idServer = idServer;
         this.modalidade = modalidade;
         this.ativo = ativo;
     }
 
+    private Long idServer;
     private String modalidade;
     @SerializedName("id_usuario")
     private Long idUsuario;
@@ -67,6 +71,14 @@ public class ModalidadeModel implements Serializable  {
 
     public void setIdUsuario(Long idUsuario) {
         this.idUsuario = idUsuario;
+    }
+
+    public Long getIdServer() {
+        return idServer;
+    }
+
+    public void setIdServer(Long idServer) {
+        this.idServer = idServer;
     }
 
     @Override

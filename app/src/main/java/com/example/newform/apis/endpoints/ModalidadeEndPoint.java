@@ -15,9 +15,9 @@ public interface ModalidadeEndPoint {
     Call<RespostaModel> postModalidade(@Body ModalidadeModel modalidadeModel);
 
     @GET("api/modalidade/buscar")
-    Call<ModalidadeModel> getModalidade(@Query("nome") final String nome, @Query("idUsuario") final Long idUsuario);
+    Call<ModalidadeModel> getModalidade(@Query("nome") final String nome, @Query("id_usuario") final Long idUsuario);
 
     @GET("api/modalidade/buscar")
-    Call<List<ModalidadeModel>> getModalidades(@Query("idUsuario") final Long idUsuario);
+    Call<List<ModalidadeModel>> getModalidades(@Query("id_usuario") final Long idUsuario);
 
 }

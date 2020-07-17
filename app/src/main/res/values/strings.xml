@@ -94,4 +94,7 @@
     <string name="ponto_exclamacao">!</string>
     <string name="sair">Sair</string>
     <string name="deseja_sair_do_aplicativo">Deseja realmente sair do aplicativo?</string>
+    <string name="logando">Logando...</string>
+    <string name="salvando">Salvando...</string>
+    <string name="sincronizando">Sincronizando...</string>
 </resources>

@@ -15,7 +15,8 @@ public class ModalidadeDAO extends AbstractDAO {
     private final String[]
             colunas = {
             ModalidadeModel.COLUNA_MODALIDADE,
-            ModalidadeModel.COLUNA_ATIVO
+            ModalidadeModel.COLUNA_ATIVO,
+            ModalidadeModel.COLUNA_ID_SERVER,
     };
 
     public ModalidadeDAO (Context context) {
@@ -23,7 +24,7 @@ public class ModalidadeDAO extends AbstractDAO {
     }
 
     private ModalidadeModel cursorToStructure(final Cursor cursor) {
-        return new ModalidadeModel(getCursorString(cursor, ModalidadeModel.COLUNA_MODALIDADE), getCursorInteger(cursor, ModalidadeModel.COLUNA_ATIVO));
+        return new ModalidadeModel(getCursorLong(cursor, ModalidadeModel.COLUNA_ID_SERVER), getCursorString(cursor, ModalidadeModel.COLUNA_MODALIDADE), getCursorInteger(cursor, ModalidadeModel.COLUNA_ATIVO));
     }
 
     public List<ModalidadeModel> select(){
@@ -56,6 +57,7 @@ public class ModalidadeDAO extends AbstractDAO {
             ContentValues values = new ContentValues();
             values.put(ModalidadeModel.COLUNA_MODALIDADE, model.getModalidade());
             values.put(ModalidadeModel.COLUNA_ATIVO, 1);
+            values.put(ModalidadeModel.COLUNA_ID_SERVER, model.getIdServer());
 
             idCreated = db.replace(ModalidadeModel.TABELA_NOME, null, values);
         }
@@ -82,6 +84,24 @@ public class ModalidadeDAO extends AbstractDAO {
         }
 
         return idCreated;
+    }
+
+    public long updateIdServer(ModalidadeModel model){
+        long idUpdated = 0;
+
+        try  {
+            Open();
+
+            ContentValues values = new ContentValues();
+            values.put(ModalidadeModel.COLUNA_ID_SERVER, model.getIdServer());
+
+            idUpdated = db.update(ModalidadeModel.TABELA_NOME, values, ModalidadeModel.COLUNA_MODALIDADE + "= ?", new String[]{model.getModalidade()});
+        }
+        finally {
+            Close();
+        }
+
+        return idUpdated;
     }
 
 }

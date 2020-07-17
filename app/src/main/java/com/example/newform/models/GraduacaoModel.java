@@ -1,5 +1,7 @@
 package com.example.newform.models;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.Objects;
 
 public class GraduacaoModel {
@@ -10,7 +12,8 @@ public class GraduacaoModel {
     public static final String
             COLUNA_MODALIDADE = "modalidade",
             COLUNA_GRADUACAO = "graduacao",
-            COLUNA_ATIVO = "ativo";
+            COLUNA_ATIVO = "ativo",
+            COLUNA_ID_SERVER = "id_server";
 
 
     public static final String
@@ -20,6 +23,7 @@ public class GraduacaoModel {
                         + COLUNA_MODALIDADE + " varchar (100) not null, "
                         + COLUNA_GRADUACAO + " varchar (100) not null, "
                         + COLUNA_ATIVO + " integer not null default 1, "
+                        + COLUNA_ID_SERVER + " integer, "
                         + " foreign key (" + COLUNA_MODALIDADE + ") REFERENCES tb_modalidades ( " + COLUNA_MODALIDADE + "), "
                         + " primary key (" + COLUNA_GRADUACAO + ", " + COLUNA_MODALIDADE +" ) "
                     + ");";
@@ -36,15 +40,28 @@ public class GraduacaoModel {
     public GraduacaoModel() {
     }
 
-    public GraduacaoModel(String modalidade, String graduacao, Integer ativo) {
+    public GraduacaoModel(Long idServer, String modalidade, String graduacao, Integer ativo) {
+        this.idServer = idServer;
         this.modalidade = modalidade;
         this.graduacao = graduacao;
         this.ativo = ativo;
     }
 
+    private Long idServer;
+    @SerializedName("id_modalidade")
     private String modalidade;
     private String graduacao;
     private Integer ativo;
+    @SerializedName("id_usuario")
+    private Long idUsuario;
+
+    public Long getIdServer() {
+        return idServer;
+    }
+
+    public void setIdServer(Long idServer) {
+        this.idServer = idServer;
+    }
 
     public String getModalidade() {
         return modalidade;
@@ -68,6 +85,14 @@ public class GraduacaoModel {
 
     public void setAtivo(Integer ativo) {
         this.ativo = ativo;
+    }
+
+    public Long getIdUsuario() {
+        return idUsuario;
+    }
+
+    public void setIdUsuario(Long idUsuario) {
+        this.idUsuario = idUsuario;
     }
 
     @Override

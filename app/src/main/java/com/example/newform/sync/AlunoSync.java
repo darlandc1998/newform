@@ -6,22 +6,16 @@ import com.example.newform.apis.AlunoAPI;
 import com.example.newform.models.AlunoModel;
 import com.example.newform.models.RespostaModel;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-
 public final class AlunoSync {
 
-    public static void sync(AlunoModel aluno){
-        AlunoAPI.postAluno(aluno, new Callback<RespostaModel>() {
-            @Override
-            public void onResponse(Call<RespostaModel> call, Response<RespostaModel> response) {
-                Log.i(ServiceSync.LOG_ID, response.body().getMensagem());
-            }
+    public static Long sync(AlunoModel aluno){
+        RespostaModel resposta = AlunoAPI.postAluno(aluno);
 
-            @Override
-            public void onFailure(Call<RespostaModel> call, Throwable t) {}
-        });
+        if (resposta != null){
+            Log.i(ServiceSync.LOG_ID, resposta.getMensagem());
+        }
+
+        return resposta != null ? resposta.getCodigo() : null;
     }
 
 }

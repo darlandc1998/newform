@@ -21,6 +21,7 @@ public class MatriculaModalidadeDAO extends AbstractDAO {
             MatriculaModalidadeModel.COLUNA_DATA_FIM,
             MatriculaModalidadeModel.COLUNA_PLANO,
             MatriculaModalidadeModel.COLUNA_ATIVO,
+            MatriculaModalidadeModel.COLUNA_ID_SERVER,
     };
 
     public MatriculaModalidadeDAO(Context context){
@@ -35,7 +36,28 @@ public class MatriculaModalidadeDAO extends AbstractDAO {
         model.setDtInicio(getCursorDate(cursor, MatriculaModalidadeModel.COLUNA_DATA_INICIO));
         model.setPlano(getCursorString(cursor, MatriculaModalidadeModel.COLUNA_PLANO));
         model.setAtivo(getCursorInteger(cursor, MatriculaModalidadeModel.COLUNA_ATIVO));
+        model.setIdServer(getCursorLong(cursor, MatriculaModalidadeModel.COLUNA_ID_SERVER));
         return model;
+    }
+
+    public List<MatriculaModalidadeModel> select(){
+        List<MatriculaModalidadeModel> matriculasModalidades = new ArrayList<>();
+        try {
+            Open();
+
+            Cursor cursor = db.query(MatriculaModalidadeModel.TABELA_NOME, colunas, " ativo = 1 ", null, null, null, null);
+            cursor.moveToFirst();
+
+            while (!cursor.isAfterLast()){
+                matriculasModalidades.add(cursorToStructure(cursor));
+                cursor.moveToNext();
+            }
+            cursor.close();
+        } finally {
+            Close();
+        }
+
+        return matriculasModalidades;
     }
 
     public List<MatriculaModalidadeModel> selectForRegistration(String idRegistration){
@@ -100,6 +122,7 @@ public class MatriculaModalidadeDAO extends AbstractDAO {
             values.put(MatriculaModalidadeModel.COLUNA_DATA_INICIO, getDateAnsiFormat(model.getDtInicio()));
             values.put(MatriculaModalidadeModel.COLUNA_PLANO, model.getPlano());
             values.put(MatriculaModalidadeModel.COLUNA_ATIVO, 1);
+            values.put(MatriculaModalidadeModel.COLUNA_ID_SERVER, model.getIdServer());
 
 
             idCreated = db.replace(MatriculaModalidadeModel.TABELA_NOME, null, values);
@@ -128,6 +151,24 @@ public class MatriculaModalidadeDAO extends AbstractDAO {
         }
 
         return idCreated;
+    }
+
+    public long updateIdServer(MatriculaModalidadeModel model){
+        long idUpdated = 0;
+
+        try  {
+            Open();
+
+            ContentValues values = new ContentValues();
+            values.put(MatriculaModalidadeModel.COLUNA_ID_SERVER, model.getIdServer());
+
+            idUpdated = db.update(MatriculaModalidadeModel.TABELA_NOME, values,   MatriculaModalidadeModel.COLUNA_ID_MATRICULA + " = ? and " + MatriculaModalidadeModel.COLUNA_MODALIDADE +  " = ? and " + MatriculaModalidadeModel.COLUNA_GRADUACAO + " = ? and " + MatriculaModalidadeModel.COLUNA_PLANO + " = ? ", new String[]{model.getIdMatricula().toString(), model.getModalidade(), model.getGraduacao(), model.getPlano()});
+        }
+        finally {
+            Close();
+        }
+
+        return idUpdated;
     }
 
 }

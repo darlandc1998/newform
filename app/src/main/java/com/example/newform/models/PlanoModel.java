@@ -1,5 +1,7 @@
 package com.example.newform.models;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -12,7 +14,8 @@ public class PlanoModel implements Serializable  {
             COLUNA_MODALIDADE = "modalidade",
             COLUNA_PLANO = "plano",
             COLUNA_VALOR_MENSAL = "valor_mensal",
-            COLUNA_ATIVO = "ativo";
+            COLUNA_ATIVO = "ativo",
+            COLUNA_ID_SERVER = "id_server";
 
     public static final String
             CREATE_TABLE =
@@ -22,6 +25,7 @@ public class PlanoModel implements Serializable  {
                             + COLUNA_PLANO + " varchar (100) not null, "
                             + COLUNA_VALOR_MENSAL + " decimal(10,2) not null, "
                             + COLUNA_ATIVO + " integer not null default 1, "
+                            + COLUNA_ID_SERVER + " integer, "
                             + " foreign key (" + COLUNA_MODALIDADE + ") REFERENCES tb_modalidades (" + COLUNA_MODALIDADE + "), "
                             + " primary key (" + COLUNA_PLANO + ", " + COLUNA_VALOR_MENSAL + " ) "
                     + " );";
@@ -39,10 +43,23 @@ public class PlanoModel implements Serializable  {
     public PlanoModel() {
     }
 
+    private Long idServer;
+    @SerializedName("id_modalidade")
     private String modalidade;
     private String plano;
+    @SerializedName("valor_mensal")
     private Double valorMensal;
     private Integer ativo;
+    @SerializedName("id_usuario")
+    private Long idUsuario;
+
+    public Long getIdServer() {
+        return idServer;
+    }
+
+    public void setIdServer(Long idServer) {
+        this.idServer = idServer;
+    }
 
     public String getModalidade() {
         return modalidade;
@@ -74,6 +91,14 @@ public class PlanoModel implements Serializable  {
 
     public void setAtivo(Integer ativo) {
         this.ativo = ativo;
+    }
+
+    public Long getIdUsuario() {
+        return idUsuario;
+    }
+
+    public void setIdUsuario(Long idUsuario) {
+        this.idUsuario = idUsuario;
     }
 
     @Override

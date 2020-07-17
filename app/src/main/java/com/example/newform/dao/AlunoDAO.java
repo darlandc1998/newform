@@ -31,6 +31,7 @@ public class AlunoDAO extends AbstractDAO {
             AlunoModel.COLUNA_PAIS,
             AlunoModel.COLUNA_CEP,
             AlunoModel.COLUNA_ATIVO,
+            AlunoModel.COLUNA_ID_SERVER,
     };
 
     public AlunoDAO (Context context){
@@ -57,6 +58,7 @@ public class AlunoDAO extends AbstractDAO {
         model.setPais(getCursorString(cursor, AlunoModel.COLUNA_PAIS));
         model.setCep(getCursorString(cursor, AlunoModel.COLUNA_CEP));
         model.setAtivo(getCursorInteger(cursor, AlunoModel.COLUNA_ATIVO));
+        model.setIdServer(getCursorLong(cursor, AlunoModel.COLUNA_ID_SERVER));
         return model;
     }
 
@@ -103,6 +105,7 @@ public class AlunoDAO extends AbstractDAO {
             values.put(AlunoModel.COLUNA_PAIS, model.getPais());
             values.put(AlunoModel.COLUNA_CEP, model.getCep());
             values.put(AlunoModel.COLUNA_ATIVO, 1);
+            values.put(AlunoModel.COLUNA_ID_SERVER, model.getIdServer());
 
             if (model.getId() != null) {
                 idCreated = db.update(AlunoModel.TABELA_NOME, values, AlunoModel.COLUNA_ID + "= ?", new String[]{model.getId().toString()});
@@ -133,6 +136,24 @@ public class AlunoDAO extends AbstractDAO {
         }
 
         return idCreated;
+    }
+
+    public long updateIdServer(final AlunoModel model) {
+        long idUpdated = 0;
+
+        try  {
+            Open();
+
+            ContentValues values = new ContentValues();
+            values.put(AlunoModel.COLUNA_ID_SERVER, model.getIdServer());
+
+            idUpdated = db.update(AlunoModel.TABELA_NOME, values, AlunoModel.COLUNA_ID + "= ?", new String[]{model.getId().toString()});
+        }
+        finally {
+            Close();
+        }
+
+        return idUpdated;
     }
 
 }

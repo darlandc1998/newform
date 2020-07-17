@@ -20,6 +20,10 @@ public class GenericCode implements Serializable {
         void code(Integer param);
     }
 
+    public interface LongCode {
+        void code(Long param);
+    }
+
     public interface StringCode {
         void code(String param);
     }

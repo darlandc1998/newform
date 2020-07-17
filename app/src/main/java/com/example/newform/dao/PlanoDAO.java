@@ -14,6 +14,7 @@ public class PlanoDAO extends AbstractDAO {
 
     public static String[]
     colunas = {
+            PlanoModel.COLUNA_ID_SERVER,
             PlanoModel.COLUNA_MODALIDADE,
             PlanoModel.COLUNA_PLANO,
             PlanoModel.COLUNA_VALOR_MENSAL,
@@ -30,6 +31,7 @@ public class PlanoDAO extends AbstractDAO {
         model.setValorMensal(getCursorDouble(cursor, PlanoModel.COLUNA_VALOR_MENSAL));
         model.setModalidade(getCursorString(cursor, PlanoModel.COLUNA_MODALIDADE));
         model.setAtivo(getCursorInteger(cursor, PlanoModel.COLUNA_ATIVO));
+        model.setIdServer(getCursorLong(cursor, PlanoModel.COLUNA_ID_SERVER));
         return model;
     }
 
@@ -84,6 +86,7 @@ public class PlanoDAO extends AbstractDAO {
             values.put(PlanoModel.COLUNA_VALOR_MENSAL, model.getValorMensal());
             values.put(PlanoModel.COLUNA_MODALIDADE, model.getModalidade());
             values.put(PlanoModel.COLUNA_ATIVO, 1);
+            values.put(PlanoModel.COLUNA_ID_SERVER, model.getIdServer());
 
             idCreated = db.replace(PlanoModel.TABELA_NOME, null, values);
         }
@@ -110,6 +113,24 @@ public class PlanoDAO extends AbstractDAO {
         }
 
         return idCreated;
+    }
+
+    public long updateIdServer(PlanoModel model){
+        long idUpdated = 0;
+
+        try  {
+            Open();
+
+            ContentValues values = new ContentValues();
+            values.put(PlanoModel.COLUNA_ID_SERVER, model.getIdServer());
+
+            idUpdated = db.update(PlanoModel.TABELA_NOME, values, PlanoModel.COLUNA_PLANO + " = ? and " + PlanoModel.COLUNA_VALOR_MENSAL + " = ? ", new String[]{model.getPlano(), model.getValorMensal().toString()});
+        }
+        finally {
+            Close();
+        }
+
+        return idUpdated;
     }
 
 }

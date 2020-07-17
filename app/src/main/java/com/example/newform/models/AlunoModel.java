@@ -13,6 +13,7 @@ public class AlunoModel implements Serializable {
 
     public static final String
             COLUNA_ID = "_id",
+            COLUNA_ID_SERVER = "id_server",
             COLUNA_ALUNO = "aluno",
             COLUNA_DATA_NASCIMENTO = "data_nascimento",
             COLUNA_SEXO = "sexo",
@@ -51,6 +52,7 @@ public class AlunoModel implements Serializable {
                             + COLUNA_PAIS + " varchar(45), "
                             + COLUNA_CEP + " varchar(45), "
                             + COLUNA_ATIVO + " integer not null default 1, "
+                            + COLUNA_ID_SERVER + " integer, "
                             + " foreign key ("+ COLUNA_CIDADE + "," + COLUNA_ESTADO + ", " + COLUNA_PAIS + ") REFERENCES tb_cidades (" + COLUNA_CIDADE + ", " + COLUNA_ESTADO + ", "+ COLUNA_PAIS + ") "
                     + ");";
 
@@ -65,6 +67,7 @@ public class AlunoModel implements Serializable {
 
     @SerializedName("Id")
     private Long id;
+    private Long idServer;
     private String aluno;
     @SerializedName("data_nascimento")
     private Date dtNascimento;
@@ -227,6 +230,14 @@ public class AlunoModel implements Serializable {
 
     public void setIdUsuario(Long idUsuario) {
         this.idUsuario = idUsuario;
+    }
+
+    public Long getIdServer() {
+        return idServer;
+    }
+
+    public void setIdServer(Long idServer) {
+        this.idServer = idServer;
     }
 
     @Override

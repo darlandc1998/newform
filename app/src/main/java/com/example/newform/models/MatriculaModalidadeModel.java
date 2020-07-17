@@ -1,5 +1,7 @@
 package com.example.newform.models;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.Date;
 import java.util.Objects;
 
@@ -15,7 +17,8 @@ public class MatriculaModalidadeModel {
             COLUNA_DATA_INICIO = "data_inicio",
             COLUNA_DATA_FIM = "data_fim",
             COLUNA_PLANO = "plano",
-            COLUNA_ATIVO = "ativo";
+            COLUNA_ATIVO = "ativo",
+            COLUNA_ID_SERVER = "id_server";
 
     public static final String
             CREATE_TABLE =
@@ -28,6 +31,7 @@ public class MatriculaModalidadeModel {
                             + COLUNA_DATA_FIM + " date, "
                             + COLUNA_PLANO + " varchar(100) not null, "
                             + COLUNA_ATIVO + " integer not null default 1, "
+                            + COLUNA_ID_SERVER + " integer, "
                             + " foreign key (" + COLUNA_ID_MATRICULA + ") REFERENCES tb_matriculas ( " + MatriculaModel.COLUNA_ID + "), "
                             + " foreign key (" + COLUNA_MODALIDADE + ") REFERENCES tb_modalidades ( " + COLUNA_MODALIDADE + "), "
                             + " foreign key (" + COLUNA_MODALIDADE + "," + COLUNA_GRADUACAO + ") REFERENCES tb_graduacoes (" + COLUNA_MODALIDADE + ", " + COLUNA_GRADUACAO + "), "
@@ -48,13 +52,22 @@ public class MatriculaModalidadeModel {
 
     =================================================*/
 
+    private Long idServer;
+    @SerializedName("id_matricula")
     private Long idMatricula;
+    @SerializedName("id_modalidade")
     private String modalidade;
+    @SerializedName("id_graduacao")
     private String graduacao;
+    @SerializedName("data_inicio")
     private Date dtInicio;
+    @SerializedName("data_fim")
     private Date dtFim;
+    @SerializedName("id_plano")
     private String plano;
     private Integer ativo;
+    @SerializedName("id_usuario")
+    private Long idUsuario;
 
     //Variaveis auxiliares
     private Double valorMensalPlano;
@@ -121,6 +134,22 @@ public class MatriculaModalidadeModel {
 
     public void setValorMensalPlano(Double valorMensalPlano) {
         this.valorMensalPlano = valorMensalPlano;
+    }
+
+    public Long getIdUsuario() {
+        return idUsuario;
+    }
+
+    public void setIdUsuario(Long idUsuario) {
+        this.idUsuario = idUsuario;
+    }
+
+    public Long getIdServer() {
+        return idServer;
+    }
+
+    public void setIdServer(Long idServer) {
+        this.idServer = idServer;
     }
 
     @Override

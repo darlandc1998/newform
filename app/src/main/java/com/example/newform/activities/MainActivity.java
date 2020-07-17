@@ -10,10 +10,12 @@ import android.widget.TextView;
 import com.example.newform.R;
 import com.example.newform.apis.UsuarioAPI;
 import com.example.newform.dialogs.DialogDefault;
+import com.example.newform.dialogs.DialogSweet;
 import com.example.newform.enums.SharedEnum;
 import com.example.newform.models.UsuarioModel;
 import com.example.newform.sync.ServiceSync;
 import com.example.newform.utils.UtilSharedPreferences;
+import cn.pedant.SweetAlert.SweetAlertDialog;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -30,7 +32,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         ((Button) findViewById(R.id.btnLogar)).setOnClickListener(this);
 
         if (UtilSharedPreferences.getLong(this, SharedEnum.CODIGO_ALUNO.toString(), -1L) > 0){
-            startActivity(new Intent(MainActivity.this, HomeActivity.class));
+            nextScreen();
         }
     }
 
@@ -55,6 +57,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             return;
         }
 
+        final SweetAlertDialog dialog = DialogSweet.show(MainActivity.this, getString(R.string.logando), DialogSweet.PROGRESS_TYPE);
+        dialog.show();
+
         UsuarioAPI.getUsuario(usuario, senha, new Callback<UsuarioModel>() {
             @Override
             public void onResponse(Call<UsuarioModel> call, Response<UsuarioModel> response) {
@@ -64,19 +69,30 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     DialogDefault.messageOk(MainActivity.this, null, getString(R.string.usuario_nao_habilitado), null, null, null);
                 } else {
                     UtilSharedPreferences.putLong(MainActivity.this, SharedEnum.CODIGO_ALUNO.toString(), response.body().getId());
-                    //*Sincronizar
-                        ServiceSync.Sync(MainActivity.this);
-                    //*
-                    startActivity(new Intent(MainActivity.this, HomeActivity.class));
+                    nextScreen();
+                    dialog.dismiss();
                 }
             }
 
             @Override
             public void onFailure(Call<UsuarioModel> call, Throwable t) {
+                dialog.dismiss();
                 DialogDefault.messageOk(MainActivity.this, null, t.getMessage(), null, null, null);
             }
         });
     }
 
+    private void nextScreen(){
+        startSync();
+        startActivity(new Intent(MainActivity.this, HomeActivity.class));
+    }
+
+    private void startSync(){
+        new Thread(new Runnable() {
+            public void run() {
+                ServiceSync.Sync(MainActivity.this);
+            }
+        }).start();
+    }
 
 }

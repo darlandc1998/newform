@@ -15,7 +15,7 @@ import com.example.newform.models.PlanoModel;
 public class DBOpenHelper extends SQLiteOpenHelper {
 
     private static final String DATABASE_NOME = "newform.db";
-    private static final int DATABASE_VERSAO = 2;
+    private static final int DATABASE_VERSAO = 5;
 
     /**
      * Construtor padrão da classe.
@@ -41,7 +41,7 @@ public class DBOpenHelper extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         switch (newVersion) {
-            case 2:
+            case 5:
                 inserirCidades(db);
                 break;
         }

@@ -14,7 +14,8 @@ public class GraduacaoDAO extends AbstractDAO {
     colunas = {
             GraduacaoModel.COLUNA_MODALIDADE,
             GraduacaoModel.COLUNA_GRADUACAO,
-            GraduacaoModel.COLUNA_ATIVO
+            GraduacaoModel.COLUNA_ATIVO,
+            GraduacaoModel.COLUNA_ID_SERVER
     };
 
     public GraduacaoDAO(Context context){
@@ -22,7 +23,27 @@ public class GraduacaoDAO extends AbstractDAO {
     }
 
     private GraduacaoModel cursorToStructure(final Cursor cursor) {
-        return new GraduacaoModel(getCursorString(cursor, GraduacaoModel.COLUNA_MODALIDADE), getCursorString(cursor, GraduacaoModel.COLUNA_GRADUACAO), getCursorInteger(cursor, GraduacaoModel.COLUNA_ATIVO));
+        return new GraduacaoModel(getCursorLong(cursor, GraduacaoModel.COLUNA_ID_SERVER), getCursorString(cursor, GraduacaoModel.COLUNA_MODALIDADE), getCursorString(cursor, GraduacaoModel.COLUNA_GRADUACAO), getCursorInteger(cursor, GraduacaoModel.COLUNA_ATIVO));
+    }
+
+    public List<GraduacaoModel> select(){
+        List<GraduacaoModel> graduacoes = new ArrayList<>();
+        try {
+            Open();
+
+            Cursor cursor = db.query(GraduacaoModel.TABELA_NOME, colunas, " ativo = 1 ", null, null, null, GraduacaoModel.COLUNA_GRADUACAO);
+            cursor.moveToFirst();
+
+            while (!cursor.isAfterLast()){
+                graduacoes.add(cursorToStructure(cursor));
+                cursor.moveToNext();
+            }
+            cursor.close();
+        } finally {
+            Close();
+        }
+
+        return graduacoes;
     }
 
     public List<GraduacaoModel> selectForModality(String modality){
@@ -55,6 +76,7 @@ public class GraduacaoDAO extends AbstractDAO {
             values.put(GraduacaoModel.COLUNA_MODALIDADE, model.getModalidade());
             values.put(GraduacaoModel.COLUNA_GRADUACAO, model.getGraduacao());
             values.put(GraduacaoModel.COLUNA_ATIVO, 1);
+            values.put(GraduacaoModel.COLUNA_ID_SERVER, model.getIdServer());
 
             idCreated = db.replace(GraduacaoModel.TABELA_NOME, null, values);
         }
@@ -81,6 +103,24 @@ public class GraduacaoDAO extends AbstractDAO {
         }
 
         return idCreated;
+    }
+
+    public long updateIdServer(final GraduacaoModel model) {
+        long idUpdated = 0;
+
+        try  {
+            Open();
+
+            ContentValues values = new ContentValues();
+            values.put(GraduacaoModel.COLUNA_ID_SERVER, model.getIdServer());
+
+            idUpdated = db.update(GraduacaoModel.TABELA_NOME, values, GraduacaoModel.COLUNA_GRADUACAO + "= ? and " + GraduacaoModel.COLUNA_MODALIDADE + " = ? ", new String[]{model.getGraduacao(), model.getModalidade()});
+        }
+        finally {
+            Close();
+        }
+
+        return idUpdated;
     }
 
 }

@@ -1,5 +1,7 @@
 package com.example.newform.models;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.Date;
 import java.util.Objects;
 
@@ -14,7 +16,8 @@ public class MatriculaModel {
             COLUNA_DATA_MATRICULA = "data_matricula",
             COLUNA_DIA_VENCIMENTO = "dia_vencimento",
             COLUNA_DATA_ENCERRAMENTO = "data_encerramento",
-            COLUNA_ATIVO = "ativo";
+            COLUNA_ATIVO = "ativo",
+            COLUNA_ID_SERVER = "id_server";
 
 
     public static final String
@@ -27,6 +30,7 @@ public class MatriculaModel {
                         + COLUNA_DIA_VENCIMENTO + " integer not null, "
                         + COLUNA_DATA_ENCERRAMENTO + " date, "
                         + COLUNA_ATIVO + " integer not null default 1, "
+                        + COLUNA_ID_SERVER + " integer, "
                         + " foreign key (" + COLUNA_ID_ALUNO + ") REFERENCES tb_alunos ( " + COLUNA_ID + ") "
                     + ");";
 
@@ -52,11 +56,16 @@ public class MatriculaModel {
     =================================================*/
 
     private Long id;
+    private Long idServer;
+    @SerializedName("id_aluno")
     private Long idAluno;
     private Date dtMatricula;
+    @SerializedName("dia_vencimento")
     private Integer diaVencimento;
     private Date dtEncerramento;
     private Integer ativo;
+    @SerializedName("id_usuario")
+    private Long idUsuario;
 
     /*Variaveis auxiliares*/
     private String aluno;
@@ -115,6 +124,27 @@ public class MatriculaModel {
 
     public void setAluno(String aluno) {
         this.aluno = aluno;
+    }
+
+    public Long getIdUsuario() {
+        return idUsuario;
+    }
+
+    public void setIdUsuario(Long idUsuario) {
+        this.idUsuario = idUsuario;
+    }
+
+    public Long getIdServer() {
+        return idServer;
+    }
+
+    public void setIdServer(Long idServer) {
+        this.idServer = idServer;
+    }
+
+    @SerializedName("data_matricula")
+    public Long getDtMatriculaServer(){
+        return dtMatricula != null ? dtMatricula.getTime() : null;
     }
 
     @Override

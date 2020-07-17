@@ -21,6 +21,7 @@ public class MatriculaDAO extends AbstractDAO {
             MatriculaModel.COLUNA_DIA_VENCIMENTO,
             MatriculaModel.COLUNA_DATA_ENCERRAMENTO,
             MatriculaModel.COLUNA_ATIVO,
+            MatriculaModel.COLUNA_ID_SERVER,
     };
 
     public MatriculaDAO(Context context){
@@ -35,7 +36,28 @@ public class MatriculaDAO extends AbstractDAO {
         model.setDtMatricula(getCursorDate(cursor, MatriculaModel.COLUNA_DATA_MATRICULA));
         model.setDtEncerramento(getCursorDate(cursor, MatriculaModel.COLUNA_DATA_ENCERRAMENTO));
         model.setAtivo(getCursorInteger(cursor, MatriculaModel.COLUNA_ATIVO));
+        model.setIdServer(getCursorLong(cursor, MatriculaModel.COLUNA_ID_SERVER));
         return model;
+    }
+
+    public List<MatriculaModel> select(){
+        List<MatriculaModel> matriculas = new ArrayList<>();
+        try {
+            Open();
+
+            Cursor cursor = db.query(MatriculaModel.TABELA_NOME, colunas, " ativo = 1 ", null, null, null, null);
+            cursor.moveToFirst();
+
+            while (!cursor.isAfterLast()){
+                matriculas.add(cursorToStructure(cursor));
+                cursor.moveToNext();
+            }
+            cursor.close();
+        } finally {
+            Close();
+        }
+
+        return matriculas;
     }
 
     public List<MatriculaModel> selectWithStudentName(){
@@ -99,6 +121,7 @@ public class MatriculaDAO extends AbstractDAO {
             values.put(MatriculaModel.COLUNA_DATA_MATRICULA, getDateAnsiFormat(model.getDtMatricula()));
             values.put(MatriculaModel.COLUNA_DIA_VENCIMENTO, model.getDiaVencimento());
             values.put(MatriculaModel.COLUNA_ATIVO, 1);
+            values.put(MatriculaModel.COLUNA_ID_SERVER, model.getIdServer());
 
             idCreated = db.replace(MatriculaModel.TABELA_NOME, null, values);
 
@@ -126,6 +149,24 @@ public class MatriculaDAO extends AbstractDAO {
         }
 
         return idCreated;
+    }
+
+    public long updateIdServer(final MatriculaModel model) {
+        long idUpdated = 0;
+
+        try  {
+            Open();
+
+            ContentValues values = new ContentValues();
+            values.put(MatriculaModel.COLUNA_ID_SERVER, model.getIdServer());
+
+            idUpdated = db.update(MatriculaModel.TABELA_NOME, values, MatriculaModel.COLUNA_ID + "= ?", new String[]{model.getId().toString()});
+        }
+        finally {
+            Close();
+        }
+
+        return idUpdated;
     }
 
 }

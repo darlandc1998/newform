@@ -23,10 +23,15 @@ public class ModalidadeAPI {
         call.enqueue(callback);
     }
 
-    public static void postModalidade(ModalidadeModel modalidade, Callback<RespostaModel> callback){
+    public static RespostaModel postModalidade(ModalidadeModel modalidade){
         ModalidadeEndPoint endPoint = GenericEndPoint.retrofit.create(ModalidadeEndPoint.class);
         Call<RespostaModel> call = endPoint.postModalidade(modalidade);
-        call.enqueue(callback);
+        try {
+            return call.execute().body();
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        return null;
     }
 
 }

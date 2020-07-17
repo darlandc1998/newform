@@ -106,7 +106,7 @@ public class ModalidadeActivity extends AppCompatActivity implements View.OnClic
             return;
         }
 
-        graduacoes.add(new GraduacaoModel(null, graduacao, 1));
+        graduacoes.add(new GraduacaoModel(null, null, graduacao, 1));
         recyclerView.getAdapter().notifyDataSetChanged();
         edtGraduacao.setText(null);
     }
@@ -128,7 +128,7 @@ public class ModalidadeActivity extends AppCompatActivity implements View.OnClic
         GraduacaoDAO graduacaoDAO = new GraduacaoDAO(getApplicationContext());
 
         //Salvar modalidade
-        modalidadeDAO.insertOrReplace(new ModalidadeModel(modalidade, 1));
+        modalidadeDAO.insertOrReplace(new ModalidadeModel(null, modalidade, 1));
 
         //Deletar graduações
         for (GraduacaoModel graduacao: graduacoesExcluidas){

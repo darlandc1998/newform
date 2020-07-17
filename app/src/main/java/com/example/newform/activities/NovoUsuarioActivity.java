@@ -10,11 +10,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.newform.R;
 import com.example.newform.apis.UsuarioAPI;
 import com.example.newform.dialogs.DialogDefault;
+import com.example.newform.dialogs.DialogSweet;
 import com.example.newform.enums.SharedEnum;
 import com.example.newform.models.RespostaModel;
 import com.example.newform.models.UsuarioModel;
 import com.example.newform.utils.UtilSharedPreferences;
-
+import cn.pedant.SweetAlert.SweetAlertDialog;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -68,20 +69,26 @@ public class NovoUsuarioActivity extends AppCompatActivity implements View.OnCli
         usuario.setSenha(senha);
         usuario.setHabilitado(true);
 
+        final SweetAlertDialog dialog = DialogSweet.show(NovoUsuarioActivity.this, getString(R.string.salvando), DialogSweet.PROGRESS_TYPE);
+        dialog.show();
+
         UsuarioAPI.postUsuario(usuario, new Callback<RespostaModel>() {
             @Override
             public void onResponse(Call<RespostaModel> call, Response<RespostaModel> response) {
                 if (response != null && response.body() != null && response.body().getSucesso()) {
                     Toast.makeText(NovoUsuarioActivity.this, R.string.conta_criada_com_sucesso, Toast.LENGTH_SHORT).show();
                     UtilSharedPreferences.putLong(NovoUsuarioActivity.this, SharedEnum.CODIGO_ALUNO.toString(), response.body().getCodigo());
+                    dialog.dismiss();
                     finish();
                 } else {
+                    dialog.dismiss();
                     DialogDefault.messageOk(NovoUsuarioActivity.this, null, response.body().getMensagem(), null, null, null);
                 }
             }
 
             @Override
             public void onFailure(Call<RespostaModel> call, Throwable t) {
+                dialog.dismiss();
                 DialogDefault.messageOk(NovoUsuarioActivity.this, null, t.getMessage(), null, null, null);
             }
         });
